@@ -18,6 +18,8 @@ import org.json.JSONObject;
 @WebServlet("/checkStatus")
 public class TestRoute extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		response.getWriter().append("{\"Response\":\"It Works!\"}");
@@ -37,12 +39,15 @@ public class TestRoute extends HttpServlet {
 		    JSONObject json = null;
 		    try {
 				 json = new JSONObject(data);
+				 response.setContentType("application/json");
+				 data = json.toString();
+				 response.getWriter().append(data);
 			} catch (JSONException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
+				response.setContentType("text/plain");
+				response.getWriter().append(data);
 			}
-		response.setContentType("application/json");
-		data = json.toString();
-		response.getWriter().append(data);
+		
 	}
 
 }
